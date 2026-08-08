@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCategories, useProducts, useStoreSettings } from "@/lib/data";
 import { FAQS } from "@/lib/faqs";
+import { StorageImage } from "@/lib/storage-image";
 
 export const Route = createFileRoute("/")({
   head: () => ({
