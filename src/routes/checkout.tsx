@@ -107,6 +107,14 @@ function CheckoutPage() {
         .upload(path, file, { contentType: file.type, upsert: false });
       if (uploadError) throw new Error(uploadError.message);
 
+      const orderedItems = items.map((i) => ({
+        product_name: i.product_name,
+        variant_name: i.variant_name,
+        price: i.price,
+        quantity: i.quantity,
+        image: i.image,
+      }));
+
       const result = await submitOrder({
         data: {
           ...parsed.data,
@@ -122,6 +130,18 @@ function CheckoutPage() {
 
       clear();
       setDone(result);
+
+      // Order is saved — notify the store. Never blocks or fails the order.
+      void notifyStoreOfOrder({
+        order_number: result.order_number,
+        customer_name: parsed.data.customer_name,
+        customer_email: parsed.data.email,
+        phone: parsed.data.phone,
+        notes: parsed.data.notes ?? "",
+        total: result.total,
+        items: orderedItems,
+      });
+
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Could not place your order");
     } finally {
