@@ -14,7 +14,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useCart } from "@/lib/cart";
 import { useStoreSettings } from "@/lib/data";
+import { notifyStoreOfOrder } from "@/lib/order-notification";
 import { placeOrder } from "@/lib/orders.functions";
+
 import { StorageImage } from "@/lib/storage-image";
 import { formatEGP } from "@/lib/types";
 
