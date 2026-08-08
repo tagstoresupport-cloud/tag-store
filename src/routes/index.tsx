@@ -37,6 +37,8 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Premium PS4 and PS5 digital games with fast delivery and Vodafone Cash payment.",
       },
+      { property: "og:image", content: "https://tag-store.lovable.app/__l5e/assets-v1/fe7cc6a6-9727-41a9-ae7e-95f4f01fb5de/tag-store-og.png" },
+      { name: "twitter:image", content: "https://tag-store.lovable.app/__l5e/assets-v1/fe7cc6a6-9727-41a9-ae7e-95f4f01fb5de/tag-store-og.png" },
     ],
   }),
   component: HomePage,

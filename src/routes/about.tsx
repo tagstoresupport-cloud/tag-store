@@ -17,6 +17,8 @@ export const Route = createFileRoute("/about")({
         property: "og:description",
         content: "An Egyptian digital store for PlayStation games with fair prices and real support.",
       },
+      { property: "og:image", content: "https://tag-store.lovable.app/__l5e/assets-v1/fe7cc6a6-9727-41a9-ae7e-95f4f01fb5de/tag-store-og.png" },
+      { name: "twitter:image", content: "https://tag-store.lovable.app/__l5e/assets-v1/fe7cc6a6-9727-41a9-ae7e-95f4f01fb5de/tag-store-og.png" },
     ],
   }),
   component: AboutPage,

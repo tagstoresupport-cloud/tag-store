@@ -28,6 +28,8 @@ export const Route = createFileRoute("/checkout")({
       },
       { property: "og:title", content: "Checkout — Tag Store" },
       { property: "og:description", content: "Pay with Vodafone Cash and upload your receipt." },
+      { property: "og:image", content: "https://tag-store.lovable.app/__l5e/assets-v1/fe7cc6a6-9727-41a9-ae7e-95f4f01fb5de/tag-store-og.png" },
+      { name: "twitter:image", content: "https://tag-store.lovable.app/__l5e/assets-v1/fe7cc6a6-9727-41a9-ae7e-95f4f01fb5de/tag-store-og.png" },
     ],
   }),
   component: CheckoutPage,
