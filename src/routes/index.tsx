@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCategories, useProducts, useStoreSettings } from "@/lib/data";
 import { FAQS } from "@/lib/faqs";
+import { StorageImage } from "@/lib/storage-image";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -139,11 +140,23 @@ function HomePage() {
                 key={c.id}
                 to="/shop"
                 search={{ category: c.slug }}
-                className="card-hover rounded-2xl border bg-card p-6 shadow-card"
+                className="card-hover overflow-hidden rounded-2xl border bg-card shadow-card"
               >
-                <Gamepad2 className="h-6 w-6 text-primary" />
-                <h3 className="mt-4 font-display text-lg font-semibold">{c.name}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">Explore {c.name}</p>
+                {c.image_path ? (
+                  <StorageImage
+                    path={c.image_path}
+                    alt={c.name}
+                    className="h-36 w-full object-cover"
+                  />
+                ) : (
+                  <div className="grid h-36 w-full place-items-center bg-secondary/40">
+                    <Gamepad2 className="h-7 w-7 text-primary" />
+                  </div>
+                )}
+                <div className="p-5">
+                  <h3 className="font-display text-lg font-semibold">{c.name}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">Explore {c.name}</p>
+                </div>
               </Link>
             ))}
           </div>

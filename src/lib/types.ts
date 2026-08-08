@@ -25,6 +25,7 @@ export type Category = {
   name: string;
   slug: string;
   sort_order: number;
+  image_path: string | null;
 };
 
 export type OrderItem = {

@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Wallet } from "lucide-react";
 
+import logoAsset from "@/assets/tag-store-logo.png.asset.json";
 import { useStoreSettings } from "@/lib/data";
 
 export function Footer() {
@@ -13,9 +14,11 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary font-display text-lg font-bold text-primary-foreground">
-              T
-            </span>
+            <img
+              src={logoAsset.url}
+              alt={`${settings?.store_name ?? "Tag Store"} logo`}
+              className="h-9 w-9 rounded-xl object-cover"
+            />
             <span className="font-display text-lg font-bold">
               {settings?.store_name ?? "Tag Store"}
             </span>
