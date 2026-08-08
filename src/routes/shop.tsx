@@ -54,6 +54,8 @@ export const Route = createFileRoute("/shop")({
         property: "og:description",
         content: "Search and filter the full Tag Store PlayStation game catalog.",
       },
+      { property: "og:image", content: "https://tag-store.lovable.app/__l5e/assets-v1/fe7cc6a6-9727-41a9-ae7e-95f4f01fb5de/tag-store-og.png" },
+      { name: "twitter:image", content: "https://tag-store.lovable.app/__l5e/assets-v1/fe7cc6a6-9727-41a9-ae7e-95f4f01fb5de/tag-store-og.png" },
     ],
   }),
   component: ShopPage,

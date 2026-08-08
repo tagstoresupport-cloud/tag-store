@@ -14,6 +14,8 @@ export const Route = createFileRoute("/contact")({
       },
       { property: "og:title", content: "Contact Tag Store" },
       { property: "og:description", content: "Phone and WhatsApp support for Tag Store customers." },
+      { property: "og:image", content: "https://tag-store.lovable.app/__l5e/assets-v1/fe7cc6a6-9727-41a9-ae7e-95f4f01fb5de/tag-store-og.png" },
+      { name: "twitter:image", content: "https://tag-store.lovable.app/__l5e/assets-v1/fe7cc6a6-9727-41a9-ae7e-95f4f01fb5de/tag-store-og.png" },
     ],
   }),
   component: ContactPage,
