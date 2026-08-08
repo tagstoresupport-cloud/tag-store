@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, ShoppingCart, X } from "lucide-react";
 import { useState } from "react";
 
+import logoAsset from "@/assets/tag-store-logo.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
 import { useStoreSettings } from "@/lib/data";
@@ -24,9 +25,11 @@ export function Header() {
     <header className="sticky top-0 z-50 glass border-b">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6">
         <Link to="/" className="flex min-w-0 shrink-0 items-center gap-2">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary font-display text-lg font-bold text-primary-foreground">
-            T
-          </span>
+          <img
+            src={logoAsset.url}
+            alt={`${settings?.store_name ?? "Tag Store"} logo`}
+            className="h-9 w-9 shrink-0 rounded-xl object-cover"
+          />
           <span className="truncate font-display text-lg font-bold tracking-tight">
             {settings?.store_name ?? "Tag Store"}
           </span>

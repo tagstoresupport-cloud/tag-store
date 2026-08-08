@@ -9,7 +9,7 @@ export function useCategories() {
     queryFn: async (): Promise<Category[]> => {
       const { data, error } = await supabase
         .from("categories")
-        .select("id, name, slug, sort_order")
+        .select("id, name, slug, sort_order, image_path")
         .order("sort_order", { ascending: true })
         .order("name", { ascending: true });
       if (error) throw error;
