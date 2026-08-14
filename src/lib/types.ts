@@ -17,6 +17,10 @@ export type Product = {
   variants: Variant[];
   is_visible: boolean;
   is_featured: boolean;
+  is_best_seller: boolean;
+  featured_order: number;
+  best_seller_order: number;
+  sort_order: number;
   created_at: string;
 };
 
@@ -26,6 +30,7 @@ export type Category = {
   slug: string;
   sort_order: number;
   image_path: string | null;
+  is_visible: boolean;
 };
 
 export type OrderItem = {
@@ -47,6 +52,7 @@ export type Order = {
   items: OrderItem[];
   total: number;
   payment_method: string;
+  payment_account: string;
   payment_screenshot_path: string | null;
   status: OrderStatus;
   created_at: string;
@@ -70,6 +76,14 @@ export type StoreSettings = {
   vodafone_number: string;
   social_links: Record<string, string>;
   footer_text: string;
+  favicon_url: string | null;
+  logo_path: string | null;
+  favicon_path: string | null;
+  og_image_path: string | null;
+  store_description: string;
+  address: string;
+  working_hours: string;
+  support_email: string;
 };
 
 export function effectivePrice(v: Variant): number {
