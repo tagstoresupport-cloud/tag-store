@@ -14,11 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
+      banners: {
+        Row: {
+          button_text: string
+          button_url: string
+          created_at: string
+          description: string
+          end_date: string | null
+          id: string
+          image_path: string | null
+          is_active: boolean
+          mobile_image_path: string | null
+          sort_order: number
+          start_date: string | null
+          subtitle: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          button_text?: string
+          button_url?: string
+          created_at?: string
+          description?: string
+          end_date?: string | null
+          id?: string
+          image_path?: string | null
+          is_active?: boolean
+          mobile_image_path?: string | null
+          sort_order?: number
+          start_date?: string | null
+          subtitle?: string
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          button_text?: string
+          button_url?: string
+          created_at?: string
+          description?: string
+          end_date?: string | null
+          id?: string
+          image_path?: string | null
+          is_active?: boolean
+          mobile_image_path?: string | null
+          sort_order?: number
+          start_date?: string | null
+          subtitle?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       categories: {
         Row: {
           created_at: string
           id: string
           image_path: string | null
+          is_visible: boolean
           name: string
           slug: string
           sort_order: number
@@ -28,6 +80,7 @@ export type Database = {
           created_at?: string
           id?: string
           image_path?: string | null
+          is_visible?: boolean
           name: string
           slug: string
           sort_order?: number
@@ -37,10 +90,71 @@ export type Database = {
           created_at?: string
           id?: string
           image_path?: string | null
+          is_visible?: boolean
           name?: string
           slug?: string
           sort_order?: number
           updated_at?: string
+        }
+        Relationships: []
+      }
+      faqs: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          is_enabled: boolean
+          question: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          answer?: string
+          created_at?: string
+          id?: string
+          is_enabled?: boolean
+          question?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          is_enabled?: boolean
+          question?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      nav_items: {
+        Row: {
+          created_at: string
+          id: string
+          is_visible: boolean
+          label: string
+          sort_order: number
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_visible?: boolean
+          label?: string
+          sort_order?: number
+          updated_at?: string
+          url?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_visible?: boolean
+          label?: string
+          sort_order?: number
+          updated_at?: string
+          url?: string
         }
         Relationships: []
       }
@@ -53,6 +167,7 @@ export type Database = {
           items: Json
           notes: string | null
           order_number: string
+          payment_account: string
           payment_method: string
           payment_screenshot_path: string | null
           phone: string
@@ -68,6 +183,7 @@ export type Database = {
           items?: Json
           notes?: string | null
           order_number?: string
+          payment_account?: string
           payment_method?: string
           payment_screenshot_path?: string | null
           phone: string
@@ -83,6 +199,7 @@ export type Database = {
           items?: Json
           notes?: string | null
           order_number?: string
+          payment_account?: string
           payment_method?: string
           payment_screenshot_path?: string | null
           phone?: string
@@ -92,46 +209,97 @@ export type Database = {
         }
         Relationships: []
       }
+      payment_methods: {
+        Row: {
+          account_name: string
+          account_number: string
+          created_at: string
+          id: string
+          instructions: string
+          is_enabled: boolean
+          logo_path: string | null
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          account_name?: string
+          account_number?: string
+          created_at?: string
+          id?: string
+          instructions?: string
+          is_enabled?: boolean
+          logo_path?: string | null
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          account_name?: string
+          account_number?: string
+          created_at?: string
+          id?: string
+          instructions?: string
+          is_enabled?: boolean
+          logo_path?: string | null
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       products: {
         Row: {
+          best_seller_order: number
           category_id: string | null
           created_at: string
           description: string
+          featured_order: number
           id: string
           images: Json
+          is_best_seller: boolean
           is_featured: boolean
           is_visible: boolean
           main_image: string | null
           name: string
           slug: string
+          sort_order: number
           updated_at: string
           variants: Json
         }
         Insert: {
+          best_seller_order?: number
           category_id?: string | null
           created_at?: string
           description?: string
+          featured_order?: number
           id?: string
           images?: Json
+          is_best_seller?: boolean
           is_featured?: boolean
           is_visible?: boolean
           main_image?: string | null
           name: string
           slug: string
+          sort_order?: number
           updated_at?: string
           variants?: Json
         }
         Update: {
+          best_seller_order?: number
           category_id?: string | null
           created_at?: string
           description?: string
+          featured_order?: number
           id?: string
           images?: Json
+          is_best_seller?: boolean
           is_featured?: boolean
           is_visible?: boolean
           main_image?: string | null
           name?: string
           slug?: string
+          sort_order?: number
           updated_at?: string
           variants?: Json
         }
@@ -145,36 +313,150 @@ export type Database = {
           },
         ]
       }
+      promotions: {
+        Row: {
+          button_text: string
+          button_url: string
+          created_at: string
+          description: string
+          id: string
+          image_path: string | null
+          is_enabled: boolean
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          button_text?: string
+          button_url?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_path?: string | null
+          is_enabled?: boolean
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          button_text?: string
+          button_url?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_path?: string | null
+          is_enabled?: boolean
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_content: {
+        Row: {
+          key: string
+          updated_at: string
+          value: Json
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value?: Json
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value?: Json
+        }
+        Relationships: []
+      }
+      social_links: {
+        Row: {
+          created_at: string
+          icon: string
+          id: string
+          is_enabled: boolean
+          platform: string
+          sort_order: number
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          icon?: string
+          id?: string
+          is_enabled?: boolean
+          platform?: string
+          sort_order?: number
+          updated_at?: string
+          url?: string
+        }
+        Update: {
+          created_at?: string
+          icon?: string
+          id?: string
+          is_enabled?: boolean
+          platform?: string
+          sort_order?: number
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
       store_settings: {
         Row: {
+          address: string
+          favicon_path: string | null
+          favicon_url: string | null
           footer_text: string
           id: number
+          logo_path: string | null
           logo_url: string | null
+          og_image_path: string | null
           social_links: Json
+          store_description: string
           store_name: string
+          support_email: string
           support_phone: string
           updated_at: string
           vodafone_number: string
+          working_hours: string
         }
         Insert: {
+          address?: string
+          favicon_path?: string | null
+          favicon_url?: string | null
           footer_text?: string
           id?: number
+          logo_path?: string | null
           logo_url?: string | null
+          og_image_path?: string | null
           social_links?: Json
+          store_description?: string
           store_name?: string
+          support_email?: string
           support_phone?: string
           updated_at?: string
           vodafone_number?: string
+          working_hours?: string
         }
         Update: {
+          address?: string
+          favicon_path?: string | null
+          favicon_url?: string | null
           footer_text?: string
           id?: number
+          logo_path?: string | null
           logo_url?: string | null
+          og_image_path?: string | null
           social_links?: Json
+          store_description?: string
           store_name?: string
+          support_email?: string
           support_phone?: string
           updated_at?: string
           vodafone_number?: string
+          working_hours?: string
         }
         Relationships: []
       }
