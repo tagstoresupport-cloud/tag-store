@@ -97,3 +97,136 @@ export function slugify(input: string): string {
       .replace(/^-+|-+$/g, "") || `item-${Date.now()}`
   );
 }
+
+// ——— CMS types ———
+
+export type Banner = {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  image_path: string | null;
+  mobile_image_path: string | null;
+  button_text: string;
+  button_url: string;
+  start_date: string | null;
+  end_date: string | null;
+  is_active: boolean;
+  sort_order: number;
+};
+
+export type Promotion = {
+  id: string;
+  title: string;
+  description: string;
+  image_path: string | null;
+  button_text: string;
+  button_url: string;
+  is_enabled: boolean;
+  sort_order: number;
+};
+
+export type Faq = {
+  id: string;
+  question: string;
+  answer: string;
+  is_enabled: boolean;
+  sort_order: number;
+};
+
+export type NavItem = {
+  id: string;
+  label: string;
+  url: string;
+  is_visible: boolean;
+  sort_order: number;
+};
+
+export type SocialLink = {
+  id: string;
+  platform: string;
+  url: string;
+  icon: string;
+  is_enabled: boolean;
+  sort_order: number;
+};
+
+export type PaymentMethod = {
+  id: string;
+  name: string;
+  account_number: string;
+  account_name: string;
+  instructions: string;
+  logo_path: string | null;
+  is_enabled: boolean;
+  sort_order: number;
+};
+
+export type HeroContent = {
+  enabled: boolean;
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  button_text: string;
+  button_url: string;
+  secondary_button_text: string;
+  secondary_button_url: string;
+  background_image: string | null;
+};
+
+export type HomeSection = {
+  id: string;
+  label: string;
+  enabled: boolean;
+  title: string;
+  subtitle: string;
+};
+
+export type WhyItem = { icon: string; title: string; text: string };
+
+export type HomepageContent = {
+  hero: HeroContent;
+  sections: HomeSection[];
+  why_items: WhyItem[];
+};
+
+export type AnnouncementContent = {
+  enabled: boolean;
+  text: string;
+  link: string;
+  button_text: string;
+  position: "top" | "bottom";
+};
+
+export type FooterLink = { label: string; url: string };
+export type FooterColumn = { title: string; links: FooterLink[] };
+export type FooterContent = {
+  description: string;
+  copyright: string;
+  show_contact: boolean;
+  columns: FooterColumn[];
+};
+
+export type CheckoutContent = {
+  title: string;
+  eyebrow: string;
+  description: string;
+  payment_instructions: string;
+  screenshot_required: boolean;
+  phone_enabled: boolean;
+  phone_required: boolean;
+  email_enabled: boolean;
+  email_required: boolean;
+  notes_enabled: boolean;
+  notes_required: boolean;
+};
+
+export type WebsiteContent = {
+  title: string;
+  description: string;
+  seo_title: string;
+  seo_description: string;
+  maintenance_mode: boolean;
+  maintenance_message: string;
+};
