@@ -37,17 +37,30 @@ export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
 });
 
-const formSchema = z.object({
-  customer_name: z.string().trim().min(2, "Please enter your full name").max(100),
-  phone: z
+function buildSchema(content: CheckoutContent) {
+  const phone = z
     .string()
     .trim()
-    .min(6, "Please enter a valid phone number")
     .max(30)
-    .regex(/^[0-9+\-\s()]+$/, "Phone number may only contain digits"),
-  email: z.string().trim().email("Please enter a valid email").max(255),
-  notes: z.string().trim().max(1000).optional(),
-});
+    .regex(/^[0-9+\-\s()]*$/, "Phone number may only contain digits");
+  const email = z.string().trim().max(255);
+
+  return z.object({
+    customer_name: z.string().trim().min(2, "Please enter your full name").max(100),
+    phone:
+      content.phone_enabled && content.phone_required
+        ? phone.min(6, "Please enter a valid phone number")
+        : phone.optional().or(z.literal("")),
+    email:
+      content.email_enabled && content.email_required
+        ? email.email("Please enter a valid email").min(1, "Please enter your email")
+        : email.optional().or(z.literal("")),
+    notes:
+      content.notes_enabled && content.notes_required
+        ? z.string().trim().min(1, "Please add a note").max(1000)
+        : z.string().trim().max(1000).optional().or(z.literal("")),
+  });
+}
 
 const ALLOWED = ["image/jpeg", "image/jpg", "image/png"];
 const MAX_BYTES = 5 * 1024 * 1024;
