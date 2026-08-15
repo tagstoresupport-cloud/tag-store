@@ -37,34 +37,54 @@ export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
 });
 
-const formSchema = z.object({
-  customer_name: z.string().trim().min(2, "Please enter your full name").max(100),
-  phone: z
+function buildSchema(content: CheckoutContent) {
+  const phone = z
     .string()
     .trim()
-    .min(6, "Please enter a valid phone number")
     .max(30)
-    .regex(/^[0-9+\-\s()]+$/, "Phone number may only contain digits"),
-  email: z.string().trim().email("Please enter a valid email").max(255),
-  notes: z.string().trim().max(1000).optional(),
-});
+    .regex(/^[0-9+\-\s()]*$/, "Phone number may only contain digits");
+  const email = z.string().trim().max(255);
+
+  return z.object({
+    customer_name: z.string().trim().min(2, "Please enter your full name").max(100),
+    phone:
+      content.phone_enabled && content.phone_required
+        ? phone.min(6, "Please enter a valid phone number")
+        : phone.optional().or(z.literal("")),
+    email:
+      content.email_enabled && content.email_required
+        ? email.email("Please enter a valid email").min(1, "Please enter your email")
+        : email.optional().or(z.literal("")),
+    notes:
+      content.notes_enabled && content.notes_required
+        ? z.string().trim().min(1, "Please add a note").max(1000)
+        : z.string().trim().max(1000).optional().or(z.literal("")),
+  });
+}
 
 const ALLOWED = ["image/jpeg", "image/jpg", "image/png"];
 const MAX_BYTES = 5 * 1024 * 1024;
 
 function CheckoutPage() {
   const { items, total, clear } = useCart();
-  const { data: settings } = useStoreSettings();
   const navigate = useNavigate();
   const submitOrder = useServerFn(placeOrder);
+  const { data: checkout = DEFAULT_CHECKOUT } = useCheckoutContent();
+  const { data: allMethods = [] } = usePaymentMethods();
+  const methods = allMethods.filter((m) => m.is_enabled);
 
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [methodId, setMethodId] = useState<string | null>(null);
   const [done, setDone] = useState<{ order_number: string; total: number } | null>(null);
 
-  const vodafone = settings?.vodafone_number ?? "01068012140";
+  const selected = methods.find((m) => m.id === methodId) ?? null;
+
+  useEffect(() => {
+    if (!methodId && methods.length === 1) setMethodId(methods[0]!.id);
+  }, [methodId, methods]);
 
   const onFile = (selected: File | null) => {
     if (!selected) return;
