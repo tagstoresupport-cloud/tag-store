@@ -67,17 +67,24 @@ const MAX_BYTES = 5 * 1024 * 1024;
 
 function CheckoutPage() {
   const { items, total, clear } = useCart();
-  const { data: settings } = useStoreSettings();
   const navigate = useNavigate();
   const submitOrder = useServerFn(placeOrder);
+  const { data: checkout = DEFAULT_CHECKOUT } = useCheckoutContent();
+  const { data: allMethods = [] } = usePaymentMethods();
+  const methods = allMethods.filter((m) => m.is_enabled);
 
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [methodId, setMethodId] = useState<string | null>(null);
   const [done, setDone] = useState<{ order_number: string; total: number } | null>(null);
 
-  const vodafone = settings?.vodafone_number ?? "01068012140";
+  const selected = methods.find((m) => m.id === methodId) ?? null;
+
+  useEffect(() => {
+    if (!methodId && methods.length === 1) setMethodId(methods[0]!.id);
+  }, [methodId, methods]);
 
   const onFile = (selected: File | null) => {
     if (!selected) return;
