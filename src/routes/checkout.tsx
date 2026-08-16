@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { CheckCircle2, Copy, Upload, Wallet } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -18,7 +18,8 @@ import { notifyStoreOfOrder } from "@/lib/order-notification";
 import { placeOrder } from "@/lib/orders.functions";
 
 import { StorageImage } from "@/lib/storage-image";
-import { formatEGP } from "@/lib/types";
+import { DEFAULT_CHECKOUT, useCheckoutContent, usePaymentMethods } from "@/lib/cms";
+import { formatEGP, type CheckoutContent, type PaymentMethod } from "@/lib/types";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -71,7 +72,11 @@ function CheckoutPage() {
   const submitOrder = useServerFn(placeOrder);
   const { data: checkout = DEFAULT_CHECKOUT } = useCheckoutContent();
   const { data: allMethods = [] } = usePaymentMethods();
-  const methods = allMethods.filter((m) => m.is_enabled);
+  const methods = useMemo(
+    () => (allMethods as PaymentMethod[]).filter((m) => m.is_enabled),
+    [allMethods],
+  );
+  const formSchema = useMemo(() => buildSchema(checkout), [checkout]);
 
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
