@@ -45,7 +45,7 @@ export function ImageField({
   path: string | null;
   folder: string;
   onChange: (path: string | null) => void;
-  className?: string;
+  className?: string | undefined;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
@@ -121,11 +121,11 @@ export function TextField({
   label: string;
   value: string;
   onChange: (value: string) => void;
-  placeholder?: string;
-  type?: string;
-  textarea?: boolean;
-  rows?: number;
-  className?: string;
+  placeholder?: string | undefined;
+  type?: string | undefined;
+  textarea?: boolean | undefined;
+  rows?: number | undefined;
+  className?: string | undefined;
 }) {
   return (
     <div className={cn("space-y-2", className)}>
@@ -158,7 +158,7 @@ export function ToggleField({
   onChange,
 }: {
   label: string;
-  description?: string;
+  description?: string | undefined;
   checked: boolean;
   onChange: (checked: boolean) => void;
 }) {
