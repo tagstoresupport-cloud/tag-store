@@ -162,8 +162,8 @@ function CheckoutPage() {
       void notifyStoreOfOrder({
         order_number: result.order_number,
         customer_name: parsed.data.customer_name,
-        customer_email: parsed.data.email,
-        phone: parsed.data.phone,
+        customer_email: parsed.data.email ?? "",
+        phone: parsed.data.phone ?? "",
         notes: parsed.data.notes ?? "",
         total: result.total,
         items: orderedItems,
@@ -282,7 +282,7 @@ function CheckoutPage() {
                 </p>
                 <div className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-primary/40 bg-primary/10 px-4 py-3">
                   <span className="font-display text-xl font-bold tracking-wide" dir="ltr">
-                    {vodafone}
+                    {selected?.account_number ?? ""}
                   </span>
                   <Button
                     type="button"
@@ -290,7 +290,7 @@ function CheckoutPage() {
                     size="sm"
                     className="rounded-lg"
                     onClick={() => {
-                      navigator.clipboard.writeText(vodafone);
+                      navigator.clipboard.writeText(selected?.account_number ?? "");
                       toast.success("Number copied");
                     }}
                   >
