@@ -22,6 +22,12 @@ export type Product = {
   best_seller_order: number;
   sort_order: number;
   created_at: string;
+  platform_ids: string[];
+  product_type: string;
+  in_stock: boolean;
+  price: number;
+  old_price: number | null;
+  discount_enabled: boolean;
 };
 
 export type Category = {
@@ -31,6 +37,15 @@ export type Category = {
   sort_order: number;
   image_path: string | null;
   is_visible: boolean;
+};
+
+export type Platform = {
+  id: string;
+  name: string;
+  slug: string;
+  icon_path: string | null;
+  is_enabled: boolean;
+  sort_order: number;
 };
 
 export type OrderItem = {
