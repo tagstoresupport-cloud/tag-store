@@ -18,7 +18,21 @@ import { useIsAdmin, useSession } from "@/lib/admin-auth";
 import { supabase } from "@/integrations/supabase/client";
 
 const NAV: {
-  to: "/admin" | "/admin/products" | "/admin/product/$id" | "/admin/categories" | "/admin/orders" | "/admin/customers" | "/admin/settings";
+  to:
+    | "/admin"
+    | "/admin/products"
+    | "/admin/product/$id"
+    | "/admin/categories"
+    | "/admin/platforms"
+    | "/admin/banners"
+    | "/admin/promotions"
+    | "/admin/faqs"
+    | "/admin/navigation"
+    | "/admin/social"
+    | "/admin/payments"
+    | "/admin/orders"
+    | "/admin/customers"
+    | "/admin/settings";
   label: string;
   icon: typeof LayoutDashboard;
   exact: boolean;
@@ -28,9 +42,16 @@ const NAV: {
   { to: "/admin/products", label: "Products", icon: Package, exact: false },
   { to: "/admin/product/$id", label: "Add Product", icon: PlusCircle, exact: false, isNew: true },
   { to: "/admin/categories", label: "Categories", icon: FolderTree, exact: false },
+  { to: "/admin/platforms", label: "Platforms", icon: Gamepad2, exact: false },
+  { to: "/admin/banners", label: "Banners", icon: Images, exact: false },
+  { to: "/admin/promotions", label: "Promotions", icon: Megaphone, exact: false },
+  { to: "/admin/faqs", label: "FAQ", icon: HelpCircle, exact: false },
+  { to: "/admin/navigation", label: "Navigation", icon: Link2, exact: false },
+  { to: "/admin/social", label: "Social Links", icon: Share2, exact: false },
+  { to: "/admin/payments", label: "Payments", icon: CreditCard, exact: false },
   { to: "/admin/orders", label: "Orders", icon: ShoppingBag, exact: false },
   { to: "/admin/customers", label: "Customers", icon: Users, exact: false },
-  { to: "/admin/settings", label: "Settings", icon: Settings, exact: false },
+  { to: "/admin/settings", label: "Store Settings", icon: Settings, exact: false },
 ];
 
 
