@@ -248,20 +248,59 @@ export type Database = {
         }
         Relationships: []
       }
+      platforms: {
+        Row: {
+          created_at: string
+          icon_path: string | null
+          id: string
+          is_enabled: boolean
+          name: string
+          slug: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          icon_path?: string | null
+          id?: string
+          is_enabled?: boolean
+          name?: string
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          icon_path?: string | null
+          id?: string
+          is_enabled?: boolean
+          name?: string
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           best_seller_order: number
           category_id: string | null
           created_at: string
           description: string
+          discount_enabled: boolean
           featured_order: number
           id: string
           images: Json
+          in_stock: boolean
           is_best_seller: boolean
           is_featured: boolean
           is_visible: boolean
           main_image: string | null
           name: string
+          old_price: number | null
+          platform_ids: string[]
+          price: number
+          product_type: string
           slug: string
           sort_order: number
           updated_at: string
@@ -272,14 +311,20 @@ export type Database = {
           category_id?: string | null
           created_at?: string
           description?: string
+          discount_enabled?: boolean
           featured_order?: number
           id?: string
           images?: Json
+          in_stock?: boolean
           is_best_seller?: boolean
           is_featured?: boolean
           is_visible?: boolean
           main_image?: string | null
           name: string
+          old_price?: number | null
+          platform_ids?: string[]
+          price?: number
+          product_type?: string
           slug: string
           sort_order?: number
           updated_at?: string
@@ -290,14 +335,20 @@ export type Database = {
           category_id?: string | null
           created_at?: string
           description?: string
+          discount_enabled?: boolean
           featured_order?: number
           id?: string
           images?: Json
+          in_stock?: boolean
           is_best_seller?: boolean
           is_featured?: boolean
           is_visible?: boolean
           main_image?: string | null
           name?: string
+          old_price?: number | null
+          platform_ids?: string[]
+          price?: number
+          product_type?: string
           slug?: string
           sort_order?: number
           updated_at?: string
@@ -406,6 +457,7 @@ export type Database = {
       store_settings: {
         Row: {
           address: string
+          currency: string
           favicon_path: string | null
           favicon_url: string | null
           footer_text: string
@@ -416,14 +468,17 @@ export type Database = {
           social_links: Json
           store_description: string
           store_name: string
+          store_status: string
           support_email: string
           support_phone: string
           updated_at: string
           vodafone_number: string
+          whatsapp_number: string
           working_hours: string
         }
         Insert: {
           address?: string
+          currency?: string
           favicon_path?: string | null
           favicon_url?: string | null
           footer_text?: string
@@ -434,14 +489,17 @@ export type Database = {
           social_links?: Json
           store_description?: string
           store_name?: string
+          store_status?: string
           support_email?: string
           support_phone?: string
           updated_at?: string
           vodafone_number?: string
+          whatsapp_number?: string
           working_hours?: string
         }
         Update: {
           address?: string
+          currency?: string
           favicon_path?: string | null
           favicon_url?: string | null
           footer_text?: string
@@ -452,10 +510,12 @@ export type Database = {
           social_links?: Json
           store_description?: string
           store_name?: string
+          store_status?: string
           support_email?: string
           support_phone?: string
           updated_at?: string
           vodafone_number?: string
+          whatsapp_number?: string
           working_hours?: string
         }
         Relationships: []
