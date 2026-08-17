@@ -1,12 +1,19 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
+  CreditCard,
   FolderTree,
+  Gamepad2,
+  HelpCircle,
+  Images,
   LayoutDashboard,
+  Link2,
   LogOut,
+  Megaphone,
   Package,
   PlusCircle,
   Settings,
+  Share2,
   ShoppingBag,
   Users,
 } from "lucide-react";
