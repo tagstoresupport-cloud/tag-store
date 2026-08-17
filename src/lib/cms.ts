@@ -10,6 +10,7 @@ import type {
   HomepageContent,
   NavItem,
   PaymentMethod,
+  Platform,
   Promotion,
   SocialLink,
   WebsiteContent,
@@ -150,6 +151,7 @@ export const usePromotions = () => useCollection<Promotion>("promotions");
 export const useFaqs = () => useCollection<Faq>("faqs");
 export const useNavItems = () => useCollection<NavItem>("nav_items");
 export const useSocialLinks = () => useCollection<SocialLink>("social_links");
+export const usePlatforms = () => useCollection<Platform>("platforms");
 export const usePaymentMethods = () => useCollection<PaymentMethod>("payment_methods");
 
 export function useCollectionMutations(table: string) {

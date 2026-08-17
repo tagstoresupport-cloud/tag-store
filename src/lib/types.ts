@@ -22,6 +22,12 @@ export type Product = {
   best_seller_order: number;
   sort_order: number;
   created_at: string;
+  platform_ids: string[];
+  product_type: string;
+  in_stock: boolean;
+  price: number;
+  old_price: number | null;
+  discount_enabled: boolean;
 };
 
 export type Category = {
@@ -31,6 +37,15 @@ export type Category = {
   sort_order: number;
   image_path: string | null;
   is_visible: boolean;
+};
+
+export type Platform = {
+  id: string;
+  name: string;
+  slug: string;
+  icon_path: string | null;
+  is_enabled: boolean;
+  sort_order: number;
 };
 
 export type OrderItem = {
@@ -244,3 +259,30 @@ export type WebsiteContent = {
   maintenance_mode: boolean;
   maintenance_message: string;
 };
+
+export type Pricing = { current: number; old: number | null; off: number | null };
+
+/** Resolves display pricing from the product base price, falling back to variants. */
+export function productPricing(p: Product): Pricing {
+  let current = Number(p.price) || 0;
+  let old: number | null =
+    p.discount_enabled && p.old_price ? Number(p.old_price) : null;
+
+  if (!current) {
+    const available = (p.variants ?? []).filter((v) => v.available);
+    if (available.length > 0) {
+      const cheapest = available.reduce((a, b) =>
+        effectivePrice(a) <= effectivePrice(b) ? a : b,
+      );
+      current = effectivePrice(cheapest);
+      if (cheapest.discount_price && cheapest.discount_price > 0) old = cheapest.price;
+    }
+  }
+
+  const hasOld = old !== null && old > current;
+  return {
+    current,
+    old: hasOld ? old : null,
+    off: hasOld ? Math.round((1 - current / (old as number)) * 100) : null,
+  };
+}
